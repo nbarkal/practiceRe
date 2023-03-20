@@ -1,22 +1,49 @@
 import React from 'react'
 import { Button, Modal } from 'antd';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-export const TheModal = ( props ) => {
+export const TheModal = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [array, newArray] = useState(props.array)
+  const [comArr, setComArr] = useState([])
 
-    const showModal = async () => {
-        setIsModalOpen(true);
-    };
+  const showModal = () => {
+    setIsModalOpen(true);
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+    newArray(array.map((arr) => {
+      return (
+        arr.id
+      )
+    }))
+  };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+  const getPostComments = async () => {
+    try {
+      const resP = await axios.get(`https://jsonplaceholder.typicode.com/posts/${array[2].id}/comments`)
+      setComArr(resP.data)
+    } catch (error) {
+      console.log('error', error)
+      alert(error.message)
+    }
+  }
+
+  useEffect(() => {
+    getPostComments()
+  }, [comArr])
+
+
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    console.log(array)
+    console.log(comArr)
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>

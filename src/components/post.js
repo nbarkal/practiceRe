@@ -5,7 +5,7 @@ import { TheModal } from './modal'
 
 const baseURL = "https://jsonplaceholder.typicode.com/posts";
 const baseURLuser = "https://jsonplaceholder.typicode.com/users";
-const commentURL = "https://jsonplaceholder.typicode.com/posts/4/comments";
+const commentURL = "https://jsonplaceholder.typicode.com/posts/1/comments";
 
 const apies = [
     "https://jsonplaceholder.typicode.com/posts",
@@ -14,26 +14,13 @@ const apies = [
 
 export const Post = () => {
 
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // const showModal = async () => {
-    //     setIsModalOpen(true);
-    // };
-
-    // const handleOk = () => {
-    //     setIsModalOpen(false);
-    // };
-
-    // const handleCancel = () => {
-    //     setIsModalOpen(false);
-    // };
-
-
     const [posts, setPosts] = useState([])
 
     const [users, setUsers] = useState([])
 
     const [comments, setComments] = useState([])
+
+    const [postComments, showPostComments] = useState([])
 
     const getPosts = async () => {
         try {
@@ -73,17 +60,20 @@ export const Post = () => {
         getComments();
     }, [])
 
+    const array = posts;
+
     return (
-        <>
-            {comments.map((comment) => {
+        <div>
+            {posts.map((post) => {
                 return (
-                    <div style={{display: 'flex'}}>
-                        {comment.name} <TheModal id={comment.id} name={comment.body} key={comment.id} />
+                    <div key={post.id} style={{display: 'flex'}}>
+                        {post.id} <TheModal array={array} id={post.id} name='as' key={post.id} />
                     </div>
                 )
             })}
-        </>
+        </div>
     );
+
 }
 
 
