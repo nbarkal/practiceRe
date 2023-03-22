@@ -6,39 +6,18 @@ import axios from 'axios';
 export const TheModal = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [array, newArray] = useState(props.array)
   const [comArr, setComArr] = useState([])
 
-  const showModal = () => {
+  const showModal = async () => {
+    console.log('props', props)
+    const resP = await axios.get(`https://jsonplaceholder.typicode.com/posts/${props.id}/comments`)
+    console.log('resPresP', resP)
+    setComArr(resP.data)
     setIsModalOpen(true);
-
-    newArray(array.map((arr) => {
-      return (
-        arr.id
-      )
-    }))
   };
-
-  const getPostComments = async () => {
-    try {
-      const resP = await axios.get(`https://jsonplaceholder.typicode.com/posts/${array[2].id}/comments`)
-      setComArr(resP.data)
-    } catch (error) {
-      console.log('error', error)
-      alert(error.message)
-    }
-  }
-
-  useEffect(() => {
-    getPostComments()
-  }, [comArr])
-
-
 
   const handleOk = () => {
     setIsModalOpen(false);
-    console.log(array)
-    console.log(comArr)
   };
 
   const handleCancel = () => {
@@ -51,7 +30,9 @@ export const TheModal = (props) => {
         comments
       </Button>
       <Modal title={props.id} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        {props.name}
+        {comArr.map(item => {
+          return <div key={item.id}> {item.id} - {item.body}</div>
+        })}
       </Modal>
     </div>
   )

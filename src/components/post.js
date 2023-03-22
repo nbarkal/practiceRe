@@ -57,7 +57,7 @@ export const Post = () => {
     useEffect(() => {
         getPosts();
         getUsers();
-        getComments();
+        // getComments();
     }, [])
 
     const array = posts;
@@ -67,7 +67,7 @@ export const Post = () => {
             {posts.map((post) => {
                 return (
                     <div key={post.id} style={{display: 'flex'}}>
-                        {post.id} <TheModal array={array} id={post.id} name='as' key={post.id} />
+                        {post.body} <TheModal array={array} id={post.id} name='as' key={post.id} />
                     </div>
                 )
             })}
