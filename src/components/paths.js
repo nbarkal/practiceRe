@@ -1,2 +1,2 @@
-export const Product = '/products'
+export const Product = '/product'
 export const ProductsTable = '/'

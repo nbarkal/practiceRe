@@ -9,11 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from 'react-router-dom'
+import * as path from './paths'
 
 export const ProductsTable = () => {
 
 
     const [productsData, setProductsData] = useState([])
+    const [productId, setProductId] = useState('/product')
 
     useEffect(() => {
         fetch(`https://dummyjson.com/products`)
@@ -22,8 +24,8 @@ export const ProductsTable = () => {
             .catch((err) => {
                 console.log(err.message);
             });
-        console.log(productsData)
     }, [])
+
 
     return (
         <div>
@@ -39,24 +41,27 @@ export const ProductsTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {productsData.map((product) => (
-                            <TableRow
-                                key={product.title}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="product">
-                                    {product.title}
-                                </TableCell>
-                                <TableCell align="right">{product.brand}</TableCell>
-                                <TableCell align="right">{product.rating}</TableCell>
-                                <TableCell align="right">{product.price}</TableCell>
-                                <TableCell align="right">
-                                    <Link to='/products'>
-                                        <VisibilityIcon />
-                                    </Link>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {productsData.map((product) => {
+                            return (
+                                <TableRow
+                                    key={product.title}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="product">
+                                        {product.title}
+                                    </TableCell>
+                                    <TableCell align="right">{product.brand}</TableCell>
+                                    <TableCell align="right">{product.rating}</TableCell>
+                                    <TableCell align="right">{product.price}</TableCell>
+                                    <TableCell align="right">
+                                        <Link to={productId}>
+                                            <VisibilityIcon />
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        })}
+                        {console.log(productsData)}
                     </TableBody>
                 </Table>
             </TableContainer>
