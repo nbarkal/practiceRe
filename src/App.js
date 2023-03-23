@@ -2,15 +2,16 @@ import './App.css';
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import { Post } from './components/post';
+import { ProductsTable } from './components/productsTable';
+import { RouterList } from './components/Router';
 
 
-function App() {
+export default function App() {
 
   return (
     <div className="App">
-      <Post/>
+      <RouterList />
     </div>
   );
 }
 
-export default App;
