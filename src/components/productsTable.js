@@ -41,7 +41,7 @@ export const ProductsTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {productsData.map((product) => {
+                        {productsData.map((product) => {                           
                             return (
                                 <TableRow
                                     key={product.title}
@@ -54,14 +54,16 @@ export const ProductsTable = () => {
                                     <TableCell align="right">{product.rating}</TableCell>
                                     <TableCell align="right">{product.price}</TableCell>
                                     <TableCell align="right">
-                                        <Link to={productId}>
+                                        <Link to={`/product/${product.id}`}>
                                             <VisibilityIcon />
                                         </Link>
                                     </TableCell>
                                 </TableRow>
                             )
                         })}
+                        
                         {console.log(productsData)}
+                    
                     </TableBody>
                 </Table>
             </TableContainer>
