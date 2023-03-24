@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Post } from './components/post';
 import { ProductsTable } from './components/productsTable';
 import { RouterList } from './components/Router';
+import { Search } from './components/search';
 
 
 export default function App() {

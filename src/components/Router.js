@@ -3,6 +3,9 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import * as path from './paths'
 import Product from './Product';
 import { ProductsTable } from './productsTable';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react'
 
 
 const renderNestedRoutes = r => {
@@ -15,7 +18,7 @@ const renderNestedRoutes = r => {
     )
 }
 
-export const RouterList = (  ) => {
+export const RouterList = () => {
 
     const routes = [
 
@@ -25,12 +28,15 @@ export const RouterList = (  ) => {
             key: path.ProductsTable,
         },
         {
-            component: <Product />,
+            component: <Product />, 
             path: path.Product,
             key: path.Product
         }
 
     ]
+
+    const params = useParams()
+    console.log(params)
 
     return (
         <Routes>
