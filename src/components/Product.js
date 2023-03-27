@@ -66,8 +66,8 @@ const Product = () => {
     return (
         <div>
             <br /><br /><br />
-            {loading ? <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box> : <></>}
             <br /><br /><br />
+            {loading ? <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box> : <></>}
             <br /><br /><br />
             <Card style={{ margin: '0 auto' }} sx={{ maxWidth: 345 }}>
                 <CardMedia
