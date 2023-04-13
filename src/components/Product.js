@@ -20,6 +20,7 @@ import phone from '../components/images/phones.png'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
+
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -34,7 +35,7 @@ const ExpandMore = styled((props) => {
 
 const Product = () => {
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
     const [loading, setLoading] = useState(false)
 
     const handleExpandClick = () => {
@@ -42,7 +43,7 @@ const Product = () => {
     };
 
     const { id } = useParams()
-    const productUrl = `https://dummyjson.com/products/${id}`
+    const productUrl = `http://localhost:3000/posts/${id}`
     const [productById, setProductById] = useState({
         images: []
     })
@@ -73,8 +74,7 @@ const Product = () => {
                 <CardMedia
                     component="img"
                     height="200"
-                    // image={phone}
-                    image={productById.images[0]}
+                    // image={productById.images[0]}
                     alt="Paella dish"
                 />
                 <CardContent>
@@ -119,6 +119,10 @@ const Product = () => {
                         <br />
                         <Typography>
                             Stock: {productById.stock}
+                        </Typography>
+                        <br />
+                        <Typography>
+                            condition: {productById.condition}
                         </Typography>
                     </CardContent>
                 </Collapse>
