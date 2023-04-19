@@ -1,7 +1,13 @@
-:where(.css-dev-only-do-not-override-ph9edi).ant-popconfirm .ant-popconfirm-buttons button{
+:where(.css-dev-only-do-not-override-ph9edi).ant-popconfirm .ant-popconfirm-buttons button {
     margin-right: 10px;
 }
 
-.flex{
+:where(.css-dev-only-do-not-override-ph9edi).ant-btn:not(.ant-btn-icon-only) .ant-btn-loading-icon>.anticon {
+    margin: 0 auto !important;
+}
 
+.anticon svg {
+    display: inline-block;
+    width: 15px !important;
+    height: 15px !important;
 }

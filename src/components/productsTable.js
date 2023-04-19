@@ -40,6 +40,8 @@ export const ProductsTable = () => {
         measurementId: "G-KFB94Y1G80"
     };
 
+    const [loading, setLoading] = useState(false)
+
     const [option1Checked, setOption1Checked] = useState(false);
     const [option2Checked, setOption2Checked] = useState(false);
 
@@ -99,6 +101,8 @@ export const ProductsTable = () => {
 
 
     const [product, setProduct] = useState({
+        id: null,
+        key: null,
         title: '',
         price: 0,
         description: '',
@@ -154,6 +158,7 @@ export const ProductsTable = () => {
         // const controller = new AbortController();
         // const signal = controller.signal;
         console.log(product)
+        setProduct({ ...product, id: crypto.randomUUID(), key: crypto.randomUUID() })
         fetch('http://localhost:3000/posts', {
             // signal,
             method: 'POST',
@@ -168,6 +173,7 @@ export const ProductsTable = () => {
     };
 
     const handleOk1 = async () => {
+        setLoading(true)
         try {
             await axios.put(
                 `http://localhost:3000/posts/${product.id}`,
@@ -177,6 +183,8 @@ export const ProductsTable = () => {
         } catch (error) {
             console.log(error);
         }
+        setProduct({ ...product, id: crypto.randomUUID() })
+        setLoading(false)
         console.log(product)
         setIsModalOpen(false);
     };
@@ -255,25 +263,26 @@ export const ProductsTable = () => {
             </div>
             <br /><br /><br />
             <Modal open={isModalOpen}
-            onOk={() => set ? handleOk() : handleOk1(editModal)}
-            onCancel={handleCancel}
-                // footer={[
-                //     <Button key="back" onClick={handleCancel}>
-                //         Return
-                //     </Button>,
-                //     // <Button key="submit" type="primary" onClick={() => set ? handleOk() : handleOk1(editModal)}>
-                //     //     Submit
-                //     // </Button>,
-                //     // <Button
-                //     //     key="link"
-                //     //     href="https://google.com"
-                //     //     type="primary"
-                //     //     loading={loading}
-                //     //     onClick={handleOk}
-                //     // >
-                //     //     Search on Google
-                //     // </Button>,
-                // ]}
+                // onOk={() => set ? handleOk() : handleOk1()}
+                onCancel={handleCancel}
+                footer={[
+                    set ?
+                        <>
+                            <Button key='cancel' onClick={handleCancel}> Cancel </Button>
+                            <Button key="back" onClick={handleOk}> Add </Button>
+                        </>
+                        :
+                        <>
+                            <Button key='cancel1' onClick={handleCancel}> Cancel </Button>
+                            <Button
+                                key="link"
+                                onClick={handleOk1}
+                                loading={loading}
+                            >
+                                {loading ? < CircularProgress style={{ width: '60px !important', height: '60px !important' }} /> : 'Edit'}
+                            </Button>
+                        </>
+                ]}
             >
                 <div key={editModal?.id} style={{ display: 'flex', flexDirection: 'column', padding: '20px' }}>
                     <label>Title</label>
